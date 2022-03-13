@@ -1,9 +1,14 @@
 const express = require("express");
+const cors = require("cors");
 const dotenv = require("dotenv");
 const notes = require("./data/notes");
+const connectDB = require("./config/db");
 
 const app = express();
+app.use(cors());
+
 dotenv.config();
+connectDB();
 
 app.get("/", (req, res) => {
   res.send("API is running");
