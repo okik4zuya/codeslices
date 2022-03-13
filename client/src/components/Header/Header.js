@@ -8,13 +8,16 @@ import {
   Navbar,
   NavDropdown,
 } from "react-bootstrap";
+import { Link } from "react-router-dom";
 
 export default function Header() {
   return (
     <>
       <Navbar bg="primary" expand="lg" variant="dark">
         <Container>
-          <Navbar.Brand href="#">Code Slices</Navbar.Brand>
+          <Navbar.Brand>
+            <Link to="/">Code Slices</Link>
+          </Navbar.Brand>
           <Navbar.Toggle aria-controls="navbarScroll" />
           <Navbar.Collapse id="navbarScroll">
             <Nav className="m-auto">
@@ -32,11 +35,17 @@ export default function Header() {
               style={{ maxHeight: "100px" }}
               navbarScroll
             >
-              <Nav.Link href="#action1">My Slices of Code</Nav.Link>
+              <Nav.Link>
+                <Link to="/mynotes">My Slices of Code</Link>
+              </Nav.Link>
               <NavDropdown title="User" id="navbarScrollingDropdown">
-                <NavDropdown.Item href="#action3">My Profile</NavDropdown.Item>
+                <NavDropdown.Item href="#">
+                  <Link to="/profile">My Slices of Code</Link>
+                </NavDropdown.Item>
                 <NavDropdown.Divider />
-                <NavDropdown.Item href="#action4">Logout</NavDropdown.Item>
+                <NavDropdown.Item href="#">
+                  <Link to="/">Logout</Link>
+                </NavDropdown.Item>
               </NavDropdown>
             </Nav>
           </Navbar.Collapse>
