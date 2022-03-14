@@ -8,11 +8,16 @@ import {
   Navbar,
   NavDropdown,
 } from "react-bootstrap";
+import { logout } from "../../actions/userActions";
+import { useDispatch, useSelector } from "react-redux";
 
 import { Link, useNavigate } from "react-router-dom";
 
 export default function Header() {
+  const dispatch = useDispatch();
+  const userLogin = useSelector((state) => state.userLogin);
   const navigate = useNavigate();
+
   return (
     <>
       <Navbar bg="primary" expand="lg" variant="dark">
@@ -48,6 +53,7 @@ export default function Header() {
                 <NavDropdown.Item
                   onClick={() => {
                     localStorage.removeItem("userInfo");
+                    dispatch(logout());
                     navigate("/");
                   }}
                 >
