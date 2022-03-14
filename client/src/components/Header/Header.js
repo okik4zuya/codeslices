@@ -46,7 +46,7 @@ export default function Header() {
               <Nav.Link>
                 <Link to="/mynotes">My Slices of Code</Link>
               </Nav.Link>
-              {isLogin && (
+              {userInfo && (
                 <NavDropdown
                   title={`${userInfo.name}`}
                   id="navbarScrollingDropdown"

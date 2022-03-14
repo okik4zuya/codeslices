@@ -18,6 +18,8 @@ const LoginPage = ({ history }) => {
   const userLogin = useSelector((state) => state.userLogin);
   const { loading, error, userInfo, isLogin } = userLogin;
 
+  console.log(userInfo);
+
   const submitHandler = async (e) => {
     e.preventDefault();
     dispatch(login(email, password));
