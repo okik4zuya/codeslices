@@ -10,13 +10,14 @@ import {
 } from "react-bootstrap";
 import { logout } from "../../actions/userActions";
 import { useDispatch, useSelector } from "react-redux";
-
 import { Link, useNavigate } from "react-router-dom";
 
 export default function Header() {
   const dispatch = useDispatch();
-  const userLogin = useSelector((state) => state.userLogin);
   const navigate = useNavigate();
+
+  const userLogin = useSelector((state) => state.userLogin);
+  const { loading, error, userInfo, isLogin } = userLogin;
 
   return (
     <>
@@ -45,21 +46,25 @@ export default function Header() {
               <Nav.Link>
                 <Link to="/mynotes">My Slices of Code</Link>
               </Nav.Link>
-              <NavDropdown title="User" id="navbarScrollingDropdown">
-                <NavDropdown.Item href="#">
-                  <Link to="/profile">My Slices of Code</Link>
-                </NavDropdown.Item>
-                <NavDropdown.Divider />
-                <NavDropdown.Item
-                  onClick={() => {
-                    localStorage.removeItem("userInfo");
-                    dispatch(logout());
-                    navigate("/");
-                  }}
+              {isLogin && (
+                <NavDropdown
+                  title={`${userInfo.name}`}
+                  id="navbarScrollingDropdown"
                 >
-                  Logout
-                </NavDropdown.Item>
-              </NavDropdown>
+                  <NavDropdown.Item href="#">
+                    <Link to="/profile">My Slices of Code</Link>
+                  </NavDropdown.Item>
+                  <NavDropdown.Divider />
+                  <NavDropdown.Item
+                    onClick={() => {
+                      dispatch(logout());
+                      navigate("/");
+                    }}
+                  >
+                    Logout
+                  </NavDropdown.Item>
+                </NavDropdown>
+              )}
             </Nav>
           </Navbar.Collapse>
         </Container>

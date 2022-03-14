@@ -6,19 +6,24 @@ import MainBody from "../../components/MainBody";
 import Loading from "../../components/Loading";
 import ErrorMessage from "../../components/ErrorMessage";
 import "./RegisterPage.css";
+import { register } from "../../actions/userActions";
+import { useNavigate } from "react-router-dom";
+import { useDispatch, useSelector } from "react-redux";
 
 const RegisterPage = ({ history }) => {
   const [name, setName] = useState("");
-
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [confirmPassword, setConfirmPassword] = useState("");
-  const [error, setError] = useState(false);
-  const [loading, setLoading] = useState(false);
+  const [pic, setPic] = useState(
+    "https://icon-library.com/images/anonymous-avatar-icon/anonymous-avatar-icon-25.jpg"
+  );
   const [message, setMessage] = useState("");
-  const [pic, setPic] = useState("");
   const [picMessage, setPicMessage] = useState("");
-  console.log(name, email, password, confirmPassword, pic);
+  const dispatch = useDispatch();
+  const userRegister = useSelector((state) => state.userRegister);
+  const { loading, error, userInfo } = userRegister;
+  const navigate = useNavigate();
 
   const submitHandler = async (e) => {
     e.preventDefault();
@@ -26,26 +31,8 @@ const RegisterPage = ({ history }) => {
     if (password !== confirmPassword) {
       setMessage("Password Do Not Match!");
     } else {
-      setMessage(null);
-      try {
-        const config = {
-          headers: {
-            "Content-Type": "application/json",
-          },
-        };
-        setLoading(true);
-        const { data } = await axios.post(
-          "http://localhost:5000/api/users",
-          { name, pic, email, password },
-          config
-        );
-        setLoading(false);
-        setError(false);
-        localStorage.setItem("userInfo", JSON.stringify(data));
-      } catch (error) {
-        setError(error.response.data.message);
-        setLoading(false);
-      }
+      dispatch(register(name, email, password, pic));
+      navigate("/mynotes");
     }
   };
 
