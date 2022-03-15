@@ -36,4 +36,15 @@ Content-Type: application/json
         "category": "test"
     }
 
-    ###
+###
+POST http://localhost:5000/api/users/profile
+Content-Type: application/json
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjYyMmYxZDYxNDViMzgzMzVmOWViYzBkMyIsImlhdCI6MTY0NzMzMTg3MCwiZXhwIjoxNjQ3NDE4MjcwfQ.M8stS1JnYyByjsgh4uGIDNS6atTtSMO3S-GWEaJw_ho
+
+
+
+    {
+        "name": "spiderman",
+        "email": "duck@duck.go",
+        "password": "duck"
+    }

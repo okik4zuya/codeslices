@@ -24,15 +24,7 @@ function App() {
           <Route path="/register" element={<RegisterPage />} />
           <Route path="/mynotes" element={<MyNotes search={search} />} />
           <Route path="/createnote" element={<CreateNote />} />
-          {/**<Route
-        path="/mynotes"
-        element={({ history }) => (
-          <MyNotes search={search} history={history} />
-          )}
-        />
-        <Route path="/createnote" element={CreateNote} />**/}
           <Route path="/note/:id" element={<SingleNote />} />
-
           <Route path="/profile" element={<ProfilePage />} />
         </Routes>
       </main>

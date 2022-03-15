@@ -44,27 +44,33 @@ export default function Header({ setSearch }) {
               style={{ maxHeight: "100px" }}
               navbarScroll
             >
-              <Nav.Link>
-                <Link to="/mynotes">My Slices of Code</Link>
-              </Nav.Link>
-              {userInfo && (
-                <NavDropdown
-                  title={`${userInfo.name}`}
-                  id="navbarScrollingDropdown"
-                >
-                  <NavDropdown.Item href="#">
-                    <Link to="/profile">My Slices of Code</Link>
-                  </NavDropdown.Item>
-                  <NavDropdown.Divider />
-                  <NavDropdown.Item
-                    onClick={() => {
-                      dispatch(logout());
-                      navigate("/");
-                    }}
+              {!userInfo ? (
+                <Nav.Link>
+                  <Link to="/login">Login</Link>
+                </Nav.Link>
+              ) : (
+                <>
+                  <Nav.Link>
+                    <Link to="/mynotes">My Slices of Code</Link>
+                  </Nav.Link>
+                  <NavDropdown
+                    title={`${userInfo?.name}`}
+                    id="navbarScrollingDropdown"
                   >
-                    Logout
-                  </NavDropdown.Item>
-                </NavDropdown>
+                    <NavDropdown.Item href="#">
+                      <Link to="/profile">My Pofile</Link>
+                    </NavDropdown.Item>
+                    <NavDropdown.Divider />
+                    <NavDropdown.Item
+                      onClick={() => {
+                        dispatch(logout());
+                        navigate("/");
+                      }}
+                    >
+                      Logout
+                    </NavDropdown.Item>
+                  </NavDropdown>
+                </>
               )}
             </Nav>
           </Navbar.Collapse>
