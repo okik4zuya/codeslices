@@ -4,6 +4,7 @@ import Header from "./components/Header/Header";
 import LandingPage from "./pages/LandingPage/LandingPage";
 import MyNotes from "./pages/MyNotes/MyNotes";
 import SingleNote from "./pages/SingleNote/SingleNote";
+import CreateNote from "./pages/SingleNote/CreateNote";
 import LoginPage from "./pages/LoginPage/LoginPage";
 import RegisterPage from "./pages/RegisterPage/RegisterPage";
 //import CreateNote from "./pages/CreateNote/CreateNote";
@@ -22,6 +23,7 @@ function App() {
           <Route path="/login" element={<LoginPage />} />
           <Route path="/register" element={<RegisterPage />} />
           <Route path="/mynotes" element={<MyNotes />} />
+          <Route path="/createnote" element={<CreateNote />} />
           {/**<Route
         path="/mynotes"
         element={({ history }) => (

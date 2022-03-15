@@ -16,7 +16,8 @@ const MyNotes = () => {
   const { userInfo } = userLogin;
   const navigate = useNavigate();
 
-  console.log(notes);
+  const noteCreate = useSelector((state) => state.noteCreate);
+  const { success: successCreate } = noteCreate;
 
   const deleteHandler = (id) => {
     if (window.confirm("Are you sure?")) {
@@ -29,11 +30,11 @@ const MyNotes = () => {
     if (!userInfo) {
       navigate("/");
     }
-  }, [dispatch]);
+  }, [dispatch, successCreate, navigate, userInfo]);
 
   return (
     <MainBody title={`Welcome Back ${userInfo.name}  `}>
-      <Link to="/">
+      <Link to="/createnote">
         <Button style={{ marginLeft: 10, marginBottom: 6 }} size="lg">
           Create New Slice
         </Button>
@@ -41,7 +42,7 @@ const MyNotes = () => {
       {error && <ErrorMessage variant="danger">{error}</ErrorMessage>}
       {loading && <Loading />}
 
-      {notes?.map((note) => (
+      {notes?.reverse().map((note) => (
         <Accordion key={note._id}>
           <Card style={{ margin: 10 }}>
             <Card.Header style={{ display: "flex" }}>

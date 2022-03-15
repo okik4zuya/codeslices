@@ -24,6 +24,7 @@ Content-Type: application/json
 ###
 GET http://localhost:5000/api/notes
 Content-Type: application/json
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjYyMmYxZDYxNDViMzgzMzVmOWViYzBkMyIsImlhdCI6MTY0NzMwMjI4OCwiZXhwIjoxNjQ3Mzg4Njg4fQ.R3mU2j0l8pDlXQy6cey__7Lp8zIW452QwHYxgmkCWeI
 
 ###
 POST http://localhost:5000/api/notes/create
