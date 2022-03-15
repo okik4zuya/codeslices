@@ -9,22 +9,23 @@ import ErrorMessage from "../../components/ErrorMessage";
 import Loading from "../../components/Loading";
 import ReactMarkdown from "react-markdown";
 
-function SingleNote({ match, history }) {
+function SingleNote({}) {
+  const dispatch = useDispatch();
+  const navigate = useNavigate();
   const [title, setTitle] = useState();
   const [content, setContent] = useState();
   const [category, setCategory] = useState();
   const [date, setDate] = useState("");
+  const [isFetch, setIsFetch] = useState(false);
 
-  const dispatch = useDispatch();
-  const navigate = useNavigate();
+  const states = {
+    userLogin: useSelector((state) => state.userLogin),
+    noteUpdate: useSelector((state) => state.noteUpdate),
+    noteDelete: useSelector((state) => state.noteDelete),
+  };
 
-  const noteUpdate = useSelector((state) => state.noteUpdate);
-  const { loading, error } = noteUpdate;
-  console.log(title, category, content);
-  console.log(window.location.pathname.substring(6));
-
-  const noteDelete = useSelector((state) => state.noteDelete);
-  const { loading: loadingDelete, error: errorDelete } = noteDelete;
+  const { loading: loadingUpdate, error: errorUpdate } = states.noteUpdate;
+  const { loading: loadingDelete, error: errorDelete } = states.noteDelete;
 
   const deleteHandler = (id) => {
     if (window.confirm("Are you sure?")) {
@@ -42,6 +43,7 @@ function SingleNote({ match, history }) {
     setContent(data.content);
     setCategory(data.category);
     setDate(data.updatedAt);
+    setIsFetch(true);
   };
 
   useEffect(() => {
@@ -73,73 +75,78 @@ function SingleNote({ match, history }) {
 
   return (
     <MainBody title="Edit Note">
-      <Card>
-        <Card.Header>Edit your Note</Card.Header>
-        <Card.Body>
-          <Form onSubmit={updateHandler}>
-            {loadingDelete && <Loading />}
-            {error && <ErrorMessage variant="danger">{error}</ErrorMessage>}
-            {errorDelete && (
-              <ErrorMessage variant="danger">{errorDelete}</ErrorMessage>
-            )}
-            <Form.Group controlId="title">
-              <Form.Label>Title</Form.Label>
-              <Form.Control
-                type="title"
-                placeholder="Enter the title"
-                value={title}
-                onChange={(e) => setTitle(e.target.value)}
-              />
-            </Form.Group>
+      {!isFetch && <Loading />}
+      {isFetch && (
+        <Card>
+          <Card.Header>Edit your Note</Card.Header>
+          <Card.Body>
+            <Form onSubmit={updateHandler}>
+              {loadingDelete && <Loading />}
+              {errorUpdate && (
+                <ErrorMessage variant="danger">{errorUpdate}</ErrorMessage>
+              )}
+              {errorDelete && (
+                <ErrorMessage variant="danger">{errorDelete}</ErrorMessage>
+              )}
+              <Form.Group controlId="title">
+                <Form.Label>Title</Form.Label>
+                <Form.Control
+                  type="title"
+                  placeholder="Enter the title"
+                  value={title}
+                  onChange={(e) => setTitle(e.target.value)}
+                />
+              </Form.Group>
 
-            <Form.Group controlId="content">
-              <Form.Label>Content</Form.Label>
-              <Form.Control
-                as="textarea"
-                placeholder="Enter the content"
-                rows={4}
-                value={content}
-                onChange={(e) => setContent(e.target.value)}
-              />
-            </Form.Group>
-            {content && (
-              <Card>
-                <Card.Header>Note Preview</Card.Header>
-                <Card.Body>
-                  <ReactMarkdown>{content}</ReactMarkdown>
-                </Card.Body>
-              </Card>
-            )}
+              <Form.Group controlId="content">
+                <Form.Label>Content</Form.Label>
+                <Form.Control
+                  as="textarea"
+                  placeholder="Enter the content"
+                  rows={4}
+                  value={content}
+                  onChange={(e) => setContent(e.target.value)}
+                />
+              </Form.Group>
+              {content && (
+                <Card>
+                  <Card.Header>Note Preview</Card.Header>
+                  <Card.Body>
+                    <ReactMarkdown>{content}</ReactMarkdown>
+                  </Card.Body>
+                </Card>
+              )}
 
-            <Form.Group controlId="content">
-              <Form.Label>Category</Form.Label>
-              <Form.Control
-                type="content"
-                placeholder="Enter the Category"
-                value={category}
-                onChange={(e) => setCategory(e.target.value)}
-              />
-            </Form.Group>
-            {loading && <Loading size={50} />}
-            <Button variant="primary" type="submit">
-              Update Note
-            </Button>
-            <Button
-              className="mx-2"
-              variant="danger"
-              onClick={() =>
-                deleteHandler(window.location.pathname.substring(6))
-              }
-            >
-              Delete Note
-            </Button>
-          </Form>
-        </Card.Body>
+              <Form.Group controlId="content">
+                <Form.Label>Category</Form.Label>
+                <Form.Control
+                  type="content"
+                  placeholder="Enter the Category"
+                  value={category}
+                  onChange={(e) => setCategory(e.target.value)}
+                />
+              </Form.Group>
+              {loadingUpdate && <Loading size={50} />}
+              <Button variant="primary" type="submit">
+                Update Note
+              </Button>
+              <Button
+                className="mx-2"
+                variant="danger"
+                onClick={() =>
+                  deleteHandler(window.location.pathname.substring(6))
+                }
+              >
+                Delete Note
+              </Button>
+            </Form>
+          </Card.Body>
 
-        <Card.Footer className="text-muted">
-          Updated on - {date.substring(0, 10)}
-        </Card.Footer>
-      </Card>
+          <Card.Footer className="text-muted">
+            Updated on - {date.substring(0, 10)}
+          </Card.Footer>
+        </Card>
+      )}
     </MainBody>
   );
 }

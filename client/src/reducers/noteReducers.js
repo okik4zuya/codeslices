@@ -41,10 +41,10 @@ export const noteCreateReducer = (state = {}, action) => {
   }
 };
 
-export const noteUpdateReducer = (state = {}, action) => {
+export const noteUpdateReducer = (state = { success: false }, action) => {
   switch (action.type) {
     case NOTE_UPDATE_REQUEST:
-      return { loading: true };
+      return { loading: true, success: false };
     case NOTE_UPDATE_SUCCESS:
       return { loading: false, success: true };
     case NOTE_UPDATE_FAIL:
@@ -58,7 +58,7 @@ export const noteUpdateReducer = (state = {}, action) => {
 export const noteDeleteReducer = (state = {}, action) => {
   switch (action.type) {
     case NOTE_DELETE_REQUEST:
-      return { loading: true };
+      return { loading: true, success: false };
     case NOTE_DELETE_SUCCESS:
       return { loading: false, success: true };
     case NOTE_DELETE_FAIL:

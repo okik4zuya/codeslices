@@ -25,6 +25,8 @@ const RegisterPage = ({ history }) => {
   const { loading, error, userInfo } = userRegister;
   const navigate = useNavigate();
 
+  console.log(userInfo);
+
   const submitHandler = async (e) => {
     e.preventDefault();
 
@@ -32,9 +34,14 @@ const RegisterPage = ({ history }) => {
       setMessage("Password Do Not Match!");
     } else {
       dispatch(register(name, email, password, pic));
-      navigate("/mynotes");
     }
   };
+
+  useEffect(() => {
+    if (userInfo) {
+      navigate("/login");
+    }
+  }, [userInfo]);
 
   const postDetails = (pics) => {
     if (!pics) {

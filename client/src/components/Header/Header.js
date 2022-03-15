@@ -12,7 +12,7 @@ import { logout } from "../../actions/userActions";
 import { useDispatch, useSelector } from "react-redux";
 import { Link, useNavigate } from "react-router-dom";
 
-export default function Header() {
+export default function Header({ setSearch }) {
   const dispatch = useDispatch();
   const navigate = useNavigate();
 
@@ -35,6 +35,7 @@ export default function Header() {
                   placeholder="Search"
                   className="me-2"
                   aria-label="Search"
+                  onChange={(e) => setSearch(e.target.value)}
                 />
               </Form>
             </Nav>

@@ -30,8 +30,6 @@ export const listNotes = () => async (dispatch, getState) => {
       },
     };
 
-    console.log(userInfo.token);
-
     const { data } = await axios.get(`/api/notes`, config);
 
     dispatch({

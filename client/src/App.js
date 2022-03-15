@@ -16,13 +16,13 @@ function App() {
 
   return (
     <BrowserRouter>
-      <Header />
+      <Header setSearch={setSearch} />
       <main className="App">
         <Routes>
           <Route path="/" element={<LandingPage />} exact />
           <Route path="/login" element={<LoginPage />} />
           <Route path="/register" element={<RegisterPage />} />
-          <Route path="/mynotes" element={<MyNotes />} />
+          <Route path="/mynotes" element={<MyNotes search={search} />} />
           <Route path="/createnote" element={<CreateNote />} />
           {/**<Route
         path="/mynotes"
