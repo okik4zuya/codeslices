@@ -5,22 +5,29 @@ import LandingPage from "./pages/LandingPage/LandingPage";
 import MyNotes from "./pages/MyNotes/MyNotes";
 import SingleNote from "./pages/SingleNote/SingleNote";
 import CreateNote from "./pages/SingleNote/CreateNote";
-import LoginPage from "./pages/LoginPage/LoginPage";
+
 import RegisterPage from "./pages/RegisterPage/RegisterPage";
 //import CreateNote from "./pages/CreateNote/CreateNote";
 import { useState } from "react";
 import ProfilePage from "./pages/ProfilePage/ProfilePage";
+import Dashboard from "./pages/Dashboard/Dashboard";
+import Login from "./components/Login/Login";
+import LoginPage from "./pages/LoginPage/LoginPage";
+import AuthPage from "./pages/AuthPage/AuthPage";
 
 function App() {
   const [search, setSearch] = useState("");
 
   return (
     <BrowserRouter>
-      <Header setSearch={setSearch} />
+      <div>
+        <Header setSearch={setSearch} />
+      </div>
       <main className="App">
         <Routes>
           <Route path="/" element={<LandingPage />} exact />
-          <Route path="/login" element={<LoginPage />} />
+          <Route path="/app/dashboard" element={<Dashboard />} exact />
+          <Route path="/auth" element={<AuthPage />} />
           <Route path="/register" element={<RegisterPage />} />
           <Route path="/mynotes" element={<MyNotes search={search} />} />
           <Route path="/createnote" element={<CreateNote />} />
@@ -28,7 +35,9 @@ function App() {
           <Route path="/profile" element={<ProfilePage />} />
         </Routes>
       </main>
-      <Footer />
+      <div className="hidden">
+        <Footer />
+      </div>
     </BrowserRouter>
   );
 }

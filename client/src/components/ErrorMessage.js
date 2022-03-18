@@ -1,11 +1,20 @@
 import React from "react";
-import { Alert } from "react-bootstrap";
+import {
+  Alert,
+  AlertIcon,
+  AlertTitle,
+  AlertDescription,
+} from "@chakra-ui/react";
 
-const ErrorMessage = ({ variant, children }) => {
+const ErrorMessage = ({ status, title, children }) => {
   return (
-    <Alert variant={variant} style={{ fontSize: 20 }}>
-      <strong>{children}</strong>
-    </Alert>
+    <>
+      <Alert status={status}>
+        <AlertIcon />
+        <AlertTitle mr={2}>{title}</AlertTitle>
+        <AlertDescription>{children}</AlertDescription>
+      </Alert>
+    </>
   );
 };
 

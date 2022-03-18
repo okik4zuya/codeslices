@@ -12,6 +12,7 @@ import {
   noteUpdateReducer,
   noteDeleteReducer,
 } from "../reducers/noteReducers";
+import { dashboardReducer } from "../reducers/layoutReducers";
 
 const reducer = combineReducers({
   // List of reducers
@@ -22,6 +23,7 @@ const reducer = combineReducers({
   noteUpdate: noteUpdateReducer,
   noteDelete: noteDeleteReducer,
   userUpdate: userUpdateReducer,
+  dashboard: dashboardReducer,
 });
 
 const userInfoFromLocalStorage = localStorage.getItem("userInfo")

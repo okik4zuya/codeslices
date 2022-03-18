@@ -1,25 +1,16 @@
 import React from "react";
-import { Container, Row } from "react-bootstrap";
-import "./MainBody.css";
+import { Container } from "@chakra-ui/react";
+import Header from "./Header/Header";
 
-const MainBody = ({ title, children }) => {
+const MainBody = ({ children }) => {
   return (
     <>
-      <div className="mainback">
-        <Container>
-          <Row>
-            <div className="page">
-              {title && (
-                <>
-                  <h1 className="heading">{title}</h1>
-                  <hr />
-                </>
-              )}
-              {children}
-            </div>
-          </Row>
-        </Container>
+      <div className="fixed">
+        <Header />
       </div>
+      <Container>
+        <div className="page">{children}</div>
+      </Container>
     </>
   );
 };

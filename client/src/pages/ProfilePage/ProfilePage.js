@@ -65,9 +65,12 @@ const ProfilePage = ({}) => {
     dispatch(updateProfile({ name, email, password, pic }));
   };
 
+  console.log(userInfo);
+
   return (
     <MainBody title="EDIT PROFILE">
       <div>
+        {!userInfo ? "tidak ada" : "ada"}
         <Row className="profileContainer">
           <Col md={6}>
             <Form onSubmit={submitHandler}>

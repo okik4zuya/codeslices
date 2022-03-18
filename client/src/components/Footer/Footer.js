@@ -15,7 +15,9 @@ export default function Footer() {
       >
         <Container>
           <Row>
-            <Col className="text-center py-3">Copyright &copy; Code Slices</Col>
+            <Col className="text-center py-3">
+              Copyright &copy; Jauzatu 2022
+            </Col>
           </Row>
         </Container>
       </footer>

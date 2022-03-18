@@ -1,6 +1,5 @@
 import React, { useEffect, useState } from "react";
 
-import { Form, FormControl, Button, Row, Col } from "react-bootstrap";
 import { Link, useNavigate } from "react-router-dom";
 import MainBody from "../../components/MainBody";
 import Loading from "../../components/Loading";
@@ -8,6 +7,16 @@ import ErrorMessage from "../../components/ErrorMessage";
 import "./LoginPage.css";
 import { useDispatch, useSelector } from "react-redux";
 import { login } from "../../actions/userActions";
+import {
+  Container,
+  Box,
+  Button,
+  FormControl,
+  FormLabel,
+  FormErrorMessage,
+  FormHelperText,
+  Input,
+} from "@chakra-ui/react";
 
 const LoginPage = ({ history }) => {
   const [email, setEmail] = useState("");
@@ -27,45 +36,51 @@ const LoginPage = ({ history }) => {
 
   useEffect(() => {
     if (isLogin) {
-      navigate("/mynotes");
+      navigate("/app/dashboard");
     }
   }, [isLogin]);
+  console.log(userInfo);
 
   return (
-    <MainBody title="Login">
-      <div className="loginContainer">
-        {error && <ErrorMessage variant="danger">{error}</ErrorMessage>}
-        {loading && <Loading />}
-        <Form onSubmit={submitHandler}>
-          <Form.Group controlId="formBasicEmail">
-            <Form.Label>Email address</Form.Label>
-            <FormControl
-              type="email"
-              placeholder="Enter email"
-              value={email}
-              onChange={(e) => setEmail(e.target.value)}
-            />
-          </Form.Group>
-          <Form.Group controlId="formBasicPassword">
-            <Form.Label>Password</Form.Label>
-            <FormControl
-              type="password"
-              placeholder="Enter password"
-              value={password}
-              onChange={(e) => setPassword(e.target.value)}
-            />
-          </Form.Group>
-          <Button variant="primary" type="submit">
-            Submit
-          </Button>
-        </Form>
-        <Row className="py-3">
-          <Col>
-            New Customer ? <Link to="/register">Register Here</Link>
-          </Col>
-        </Row>
-      </div>
-    </MainBody>
+    <Container>
+      {error && (
+        <ErrorMessage status="error" title="">
+          {error}
+        </ErrorMessage>
+      )}
+      {loading && <Loading />}
+      <form onSubmit={submitHandler}>
+        <FormControl>
+          <FormLabel>Email address</FormLabel>
+          <Input
+            id="email"
+            type="email"
+            placeholder="Enter email"
+            value={email}
+            onChange={(e) => setEmail(e.target.value)}
+          />
+        </FormControl>
+        <FormControl>
+          <FormLabel>Password</FormLabel>
+          <Input
+            id="password"
+            type="password"
+            placeholder="Enter password"
+            value={password}
+            onChange={(e) => setPassword(e.target.value)}
+          />
+        </FormControl>
+
+        <Button colorScheme="blue" type="submit">
+          Submit
+        </Button>
+      </form>
+      <Box className="py-3">
+        <Box>
+          New Customer ? <Link to="/register">Register Here</Link>
+        </Box>
+      </Box>
+    </Container>
   );
 };
 

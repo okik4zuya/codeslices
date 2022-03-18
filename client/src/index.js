@@ -1,13 +1,17 @@
 import React from "react";
 import ReactDOM from "react-dom";
 import { Provider } from "react-redux";
-import "./bootstrap.min.css";
+import { ChakraProvider } from "@chakra-ui/react";
 import App from "./App";
 import store from "./store/store";
+import "./index.css";
+import { extendThemeChakra } from "./extendThemeChakra";
 
 ReactDOM.render(
-  <Provider store={store}>
-    <App />
-  </Provider>,
+  <ChakraProvider theme={extendThemeChakra}>
+    <Provider store={store}>
+      <App />
+    </Provider>
+  </ChakraProvider>,
   document.getElementById("root")
 );
